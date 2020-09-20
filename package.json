@@ -5,7 +5,13 @@
   "repository": "https://github.com/pedrogneri/fatec-dashboard.git",
   "author": "Pedro Neri <pedrogneri@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
+    "fatec-api": "^1.5.0",
     "next": "^9.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
