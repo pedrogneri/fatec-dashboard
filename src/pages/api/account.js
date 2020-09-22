@@ -1,6 +1,6 @@
 import { login, myAccount } from 'api';
 
-export default (req, res) => {
+export default function (req, res) {
   const {user, password} = req.body;
 
   login(user, password);
