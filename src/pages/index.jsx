@@ -18,9 +18,9 @@ const Home = ({ name, disciplines }) => {
 };
 
 export async function getStaticProps(context) {
-  const name = await myAccount.getName();
-  const schoolGrade = await myAccount.getSchoolGrade();
-  const disciplines = JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines));
+  const name = await myAccount?.getName() || '';
+  const schoolGrade = await myAccount?.getSchoolGrade();
+  const disciplines = schoolGrade ? JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines)) : [];
 
   return {
     props: { name, disciplines },
