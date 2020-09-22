@@ -17,10 +17,6 @@ export default async function (req, res) {
 }
 
 export const getAccount = async () => {
-  if(!myAccount) {
-    return { name: '', disciplines: [], error: 'Not logged' };
-  }
-
   const name = await myAccount.getName();
   const schoolGrade = await myAccount.getSchoolGrade();
   const disciplines = JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines));
