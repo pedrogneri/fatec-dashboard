@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Container, StyledInput, StyledButton, Form } from './styles';
+import { Container, StyledInput, StyledButton, Form } from 'styles/login';
 
 const Login = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Login = () => {
           user,
           password,
         }),
-      }).then((account) => {
+      }).then(() => {
         router.push('/');
       }).catch((err) => {
         console.log("Falha: ", err);
