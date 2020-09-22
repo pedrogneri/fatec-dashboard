@@ -1,7 +1,16 @@
-import React from 'react';
-import { myAccount } from 'api';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { getAccount } from 'pages/api/account';
 
-const Home = ({ name, disciplines }) => {
+const Home = ({ name, disciplines, error }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if(error) {
+      router.push('/');
+    }
+  }, [error]);
+
   return (
     <div>
       <h1>Olá {name}</h1>
@@ -18,12 +27,10 @@ const Home = ({ name, disciplines }) => {
 };
 
 export async function getServerSideProps(context) {
-  const name = await myAccount?.getName();
-  const schoolGrade = await myAccount?.getSchoolGrade();
-  const disciplines = schoolGrade ? JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines)) : [];
+  const { name, disciplines, error } = await getAccount();
 
   return {
-    props: { name, disciplines },
+    props: { name, disciplines, error },
   }
 }
 
