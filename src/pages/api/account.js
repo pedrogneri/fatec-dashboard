@@ -4,7 +4,7 @@ export default async function (req, res) {
   if (req.method === 'POST') {
     const {user, password} = req.body;
     login(user, password);
-    sleep(600);
+    sleep(2000);
 
     res.statusCode = 200
     res.setHeader('Content-Type', 'application/json')
