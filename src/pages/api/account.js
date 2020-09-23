@@ -17,6 +17,7 @@ export default async function (req, res) {
 }
 
 export const getAccount = async () => {
+  console.log(myAccount);
   const name = await myAccount?.getName();
   const schoolGrade = await myAccount?.getSchoolGrade();
   const disciplines = schoolGrade ? JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines)) : [];
