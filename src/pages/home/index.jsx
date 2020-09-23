@@ -26,7 +26,7 @@ const Home = ({ name, disciplines, error }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getInitialProps(context) {
   const { name, disciplines, error } = await getAccount();
 
   return {
