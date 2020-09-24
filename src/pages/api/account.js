@@ -1,14 +1,22 @@
-import { login, myAccount } from 'api';
+import { Account } from 'fatec-api';
+let myAccount;
 
 export default async function (req, res) {
   if (req.method === 'POST') {
     const {user, password} = req.body;
-    login(user, password);
-    await sleep(10000);
+    myAccount = new Account();
+    myAccount.username = user;
+    myAccount.password = password;
 
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'application/json')
-    res.json({ message: 'ok' })
+    myAccount.login().then(() => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({ message: 'ok' });
+    }).catch((err) => {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({ message: err });
+    });
   } else {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
@@ -17,14 +25,9 @@ export default async function (req, res) {
 }
 
 export const getAccount = async () => {
-  console.log(myAccount);
   const name = await myAccount?.getName();
   const schoolGrade = await myAccount?.getSchoolGrade();
   const disciplines = schoolGrade ? JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines)) : [];
  
   return { name, disciplines, error: null };
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
