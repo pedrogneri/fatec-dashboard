@@ -1,10 +1,9 @@
 import { Account } from 'fatec-api';
-let myAccount;
+let myAccount = new Account();
 
 export default async function (req, res) {
-  if (req.method === 'POST') {
+  return new Promise(resolve => {
     const {user, password} = req.body;
-    myAccount = new Account();
     myAccount.username = user;
     myAccount.password = password;
 
@@ -12,16 +11,14 @@ export default async function (req, res) {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json({ message: 'ok' });
+      return resolve();
     }).catch((err) => {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       res.json({ message: err });
+      return resolve();
     });
-  } else {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(getAccount());
-  }
+  })
 }
 
 export const getAccount = async () => {
