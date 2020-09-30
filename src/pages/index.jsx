@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import fetch from 'lib/fetch';
 import { useRouter } from 'next/router';
-import { Container, StyledInput, StyledButton, Form } from 'styles/login';
+import { Container, StyledInput, StyledButton, Form, Error, Overlay, Text } from 'styles/login';
 
 const Login = () => {
   const router = useRouter();
@@ -50,8 +50,11 @@ const Login = () => {
       <Form onSubmit={handleSubmit}>
         <StyledInput name="user" onChange={handleChangeUser} placeholder="Usuário" />
         <StyledInput name="password" onChange={handleChangePassword} type="password" placeholder="Senha" />
-        <span>{error}</span>
-        <StyledButton type="submit">Confirmar</StyledButton>
+        <Error>{error}</Error>
+        <StyledButton type="submit">
+          <Text>Confirmar</Text>
+          <Overlay></Overlay>
+        </StyledButton>
       </Form>
     </Container>
   );
