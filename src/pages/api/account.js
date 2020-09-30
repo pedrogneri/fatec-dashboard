@@ -9,8 +9,8 @@ export default async function (req, res) {
 
     myAccount.login().then(() => {
       res.status(200).json({ message: 'ok' });
-    }).catch((err) => {
-      res.status(500).json({ message: err });
+    }).catch(() => {
+      res.status(401).json({ error: 'Usuário ou senha incorretos' });
     });
   } else {
     try {

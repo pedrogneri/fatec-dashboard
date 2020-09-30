@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import fetch from 'lib/fetch'
+
 import { Container, StyledInput, StyledButton, Form } from 'styles/login';
 
 const Login = () => {
   const router = useRouter();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,10 +22,14 @@ const Login = () => {
           user,
           password,
         }),
-      }).then(() => {
-        router.push('/home');
-      }).catch((err) => {
-        console.log("Falha: ", err);
+      }).then((res) => {
+        if(res.error) {
+          setError(res.error);
+        } else {
+          router.push('/home');
+        }
+      }).catch(() => {
+        setError('Falha no servidor')
       })
     }
   };
@@ -41,7 +48,7 @@ const Login = () => {
       <Form onSubmit={handleSubmit}>
         <StyledInput name="user" onChange={handleChangeUser} placeholder="Usuário" />
         <StyledInput name="password" onChange={handleChangePassword} type="password" placeholder="Senha" />
-
+        <span>{error}</span>
         <StyledButton type="submit">Confirmar</StyledButton>
       </Form>
     </Container>
