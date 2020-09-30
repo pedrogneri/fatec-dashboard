@@ -65,7 +65,7 @@ export const Overlay = styled.div`
   height: 0%;
   background-color: #000;
   position: absolute;
-  transition: height 0.4s;
+  transition: height 100ms;
   left: 0;
   top: 0;
   z-index: 2;
