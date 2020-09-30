@@ -23,10 +23,10 @@ const Login = () => {
           password,
         }),
       }).then((res) => {
-        if(res.error) {
-          setError(res.error);
-        } else {
+        if(!res.error) {
           router.push('/home');
+        } else {
+          setError(res.error);
         }
       }).catch(() => {
         setError('Falha no servidor')

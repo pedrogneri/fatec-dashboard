@@ -7,8 +7,8 @@ const Home = () => {
   const { data, error } = useSWR('/api/account', fetch);
   const router = useRouter();
 
-  if (!data) return <div>loading...</div>
   if (error || data?.error) router.push('/')
+  if (!data || data?.error) return <div>loading...</div>
 
   return (
     <div>
