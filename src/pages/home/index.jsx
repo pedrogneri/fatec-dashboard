@@ -1,5 +1,6 @@
 import React from 'react';
 import useSWR from 'swr'
+import fetch from 'lib/fetch'
 
 const Home = () => {
   const { data, error } = useSWR('/api/account', fetch);
