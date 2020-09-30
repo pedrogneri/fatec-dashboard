@@ -5,28 +5,24 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 16px;
   height: 100vh;
 `;
 
-export const Form = styled.form`
+export const GradeList = styled.ul`
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
+  min-width: 50%;
+  list-style-type: none;
 `;
 
-export const StyledInput = styled.input`
-  font-size: 14px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #000;
-  margin: 8px;
-  padding: 10px;
-`;
+export const GradeItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
 
-export const StyledButton = styled.button`
-  margin-top: 16px;
-  border: 1px solid #000;
-  background-color: transparent;
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
+  &:not(:last-child) {
+    border-bottom: 1px solid #000;
+  }
 `;
