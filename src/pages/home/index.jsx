@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { getAccount } from 'pages/api/account';
+import React from 'react';
+import useSWR from 'swr'
 
-const Home = ({ name, disciplines, error }) => {
-  const router = useRouter();
+const Home = () => {
+  const { data, error } = useSWR('/api/account', fetch);
 
-  useEffect(() => {
-    if(error) {
-      router.push('/');
-    }
-  }, [error]);
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
 
   return (
     <div>
-      <h1>Olá {name}</h1>
-      {disciplines.map(({ name, grade }) => (
+      <h1>Olá {data.name}</h1>
+      {(data.disciplines || []).map(({ name, grade }) => (
         <div key={name}>
           <span>Nome: {name}</span>
           <br/>
@@ -25,13 +21,5 @@ const Home = ({ name, disciplines, error }) => {
     </div>
   );
 };
-
-export async function getServerSideProps(context) {
-  const { name, disciplines, error } = await getAccount();
-
-  return {
-    props: { name, disciplines, error },
-  }
-}
 
 export default Home;
