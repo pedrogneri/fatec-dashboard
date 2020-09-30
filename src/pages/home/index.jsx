@@ -1,12 +1,14 @@
 import React from 'react';
 import useSWR from 'swr'
 import fetch from 'lib/fetch'
+import { useRouter } from 'next/router';
 
 const Home = () => {
   const { data, error } = useSWR('/api/account', fetch);
+  const router = useRouter();
 
-  if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
+  if (error || data?.error) router.push('/')
 
   return (
     <div>
