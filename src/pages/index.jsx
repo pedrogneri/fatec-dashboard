@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import fetch from 'lib/fetch'
 
+import fetch from 'lib/fetch';
+import { useRouter } from 'next/router';
 import { Container, StyledInput, StyledButton, Form } from 'styles/login';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(user.trim() && password.trim()) {
+    if (user.trim() && password.trim()) {
       fetch('/api/account', {
         method: 'POST',
         headers: {
@@ -22,15 +22,17 @@ const Login = () => {
           user,
           password,
         }),
-      }).then((res) => {
-        if(!res.error) {
-          router.push('/home');
-        } else {
-          setError(res.error);
-        }
-      }).catch(() => {
-        setError('Falha no servidor')
       })
+        .then((res) => {
+          if (!res.error) {
+            router.push('/home');
+          } else {
+            setError(res.error);
+          }
+        })
+        .catch(() => {
+          setError('Falha no servidor');
+        });
     }
   };
 
@@ -52,7 +54,7 @@ const Login = () => {
         <StyledButton type="submit">Confirmar</StyledButton>
       </Form>
     </Container>
-  )
-}
+  );
+};
 
 export default Login;

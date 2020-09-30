@@ -1,5 +1,8 @@
+import React from 'react';
+
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { GlobalStyle } from 'styles.js';
-import Head from 'next/head'
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -10,7 +13,12 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <Component {...pageProps} />
     </>
-  )
-}
+  );
+};
+
+App.propTypes = {
+  Component: PropTypes.any,
+  pageProps: PropTypes.any,
+};
 
 export default App;
