@@ -25,9 +25,10 @@ const Home = () => {
         <h2>loading...</h2>
       ) : (
         <>
-          <h1>Olá {capitalizedName}</h1>
+          <h2>{capitalizedName}</h2>
+          <span>{`RA: ${data.profile.code}`}</span>
           <GradeList>
-            {data.disciplines.map(({ name, grade }) => (
+            {data.semesters[0].disciplines.map(({ name, grade }) => (
               <GradeItem key={name}>
                 <span>Nome: {name}</span>
                 <span>Nota: {grade}</span>

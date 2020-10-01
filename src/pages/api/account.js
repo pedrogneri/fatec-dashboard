@@ -21,10 +21,11 @@ export default async function (req, res) {
         res.status(401).json({ error: 'Você precisa estar logado' });
       } else {
         const name = await myAccount?.getName();
+        const profile = await myAccount?.getProfile();
         const schoolGrade = await myAccount?.getSchoolGrade();
-        const disciplines = schoolGrade ? JSON.parse(JSON.stringify(schoolGrade.semesters[0].disciplines)) : [];
+        const semesters = schoolGrade ? schoolGrade.semesters : [];
 
-        res.status(200).json({ name, disciplines, error: null });
+        res.status(200).json({ name, semesters, profile, error: null });
       }
     } catch (err) {
       res.status(500).json({ error: err });
