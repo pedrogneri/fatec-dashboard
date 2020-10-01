@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import fetch from 'lib/fetch';
 import { useRouter } from 'next/router';
-import { Container, GradeList, GradeItem } from 'styles/home';
+import { Container, DisciplineList, Discipline, Grade } from 'styles/home';
 import useSWR from 'swr';
 
 const Home = () => {
@@ -27,14 +27,14 @@ const Home = () => {
         <>
           <h2>{capitalizedName}</h2>
           <span>{`RA: ${data.profile.code}`}</span>
-          <GradeList>
+          <DisciplineList>
             {data.semesters[0].disciplines.map(({ name, grade }) => (
-              <GradeItem key={name}>
-                <span>Nome: {name}</span>
-                <span>Nota: {grade}</span>
-              </GradeItem>
+              <Discipline key={name}>
+                <span>{name}</span>
+                <Grade>{grade}</Grade>
+              </Discipline>
             ))}
-          </GradeList>
+          </DisciplineList>
         </>
       )}
     </Container>
